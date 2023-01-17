@@ -41,7 +41,7 @@ module.exports = {
         updatedAt: Sequelize.fn("now")
       },
       {
-        id: 3,
+        id: 4,
         name: "canceled",
         createdAt: Sequelize.fn("now"),
         updatedAt: Sequelize.fn("now")

@@ -11,13 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Task.belongsTo(models.Status, { foreignKey: "status" })
     }
   }
   Task.init({
     userId: DataTypes.INTEGER,
     content: DataTypes.TEXT,
-    status: DataTypes.TINYINT,
-    taskDate: DataTypes.DATE
+    startDate: DataTypes.DATE,
+    endDate: DataTypes.DATE,
+    status: DataTypes.INTEGER.UNSIGNED,
   }, {
     sequelize,
     modelName: 'Task',

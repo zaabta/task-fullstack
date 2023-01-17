@@ -20,6 +20,7 @@ module.exports = {
       status: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
+        defaultValue: 1,
         references: {
           model: "status",
           key: "id"
@@ -32,7 +33,6 @@ module.exports = {
       },
       endDate: {
         type: Sequelize.DATE,
-        allowNull: false
       },
       createdAt: {
         allowNull: false,
