@@ -1,0 +1,31 @@
+.header{
+  font-size: x-large;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.input-btn{
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  width: 95%;
+}
+
+.input-btn #todo-btn {
+  border: none;
+  background-color: rgb(147, 69, 224);
+  cursor: pointer;
+  width: 150px;
+}
+.input-btn #todo-input {
+  border: none;
+  padding-left: 5px;
+  background-color: transparent;
+  border: solid 1.2px rgb(147, 69, 224);
+  color: aliceblue;
+  width: 100%;
+}
+
+.input-btn #todo-input:focus {
+  outline: none;
+}

@@ -2,18 +2,22 @@ const models = require("../../../models");
 
 const createTags = async ({tags, todoId}) => {
   try {
-    console.log(todoId)
     const transformedTags = []
     tags.forEach(tag => {
       if(tag) 
      transformedTags.push({name: tag})
     })
-    const newtags = await models.Tag.bulkCreate(transformedTags)
-    if(newtags){
+    const newtags = await models.Tag.bulkCreate(transformedTags) //1
+    if(newtags){ //2
       for(var i = 0; i < newtags.length; i++){
-        await newtags[i].addTask(todoId)
+        await newtags[i].addTask(todoId) //3
       }
     } 
+    /*models.Tag.bulkCreate(transformedTags,{ 
+      TagTask:{
+        taskId: todoId
+      }
+    })*/
     return newtags
   } catch (err) {
     console.log("ERROR from service --> ", err);

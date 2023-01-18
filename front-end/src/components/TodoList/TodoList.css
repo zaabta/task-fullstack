@@ -1,0 +1,8 @@
+.todo-list {
+  padding: 10px 0;
+  margin-top: 20px;
+  list-style: none;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: scroll;
+}
