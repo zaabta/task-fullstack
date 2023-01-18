@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Task.belongsTo(models.Status, { foreignKey: "status" })
       Task.belongsTo(models.User, { foreignKey: "userId" })
+      Task.belongsToMany(models.Tag, {through: "tagTask", foreignKey:"taskId"})
     }
   }
   Task.init({
