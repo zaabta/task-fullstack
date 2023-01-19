@@ -20,7 +20,7 @@ const errorResponse = function(messages = '', data = []) {
 }
 
 exports.unauthorized = (res) => {
-  return res.status(401).json(errorResponse("unauthorized"));
+  return res.status(401).json(errorResponse("unauthorized please login !"));
 };
 
 exports.unauthenticated = (res) => {

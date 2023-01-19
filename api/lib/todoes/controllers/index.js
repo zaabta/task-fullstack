@@ -1,6 +1,7 @@
 const responses = require("../../helper/responses");
 const services = require("../services");
 const transformers = require("../../transformers");
+const models = require("../../../models")
 
 const store = async (req, res, next) => {
   try {
@@ -60,7 +61,6 @@ const destory = async (req, res, next) => {
       userId,
       todoId
     });
-    console.log(deletedTodo);
     if (!deletedTodo[0])
       return responses.failedWithMessage("failed to remove todo", res);
     return responses.successWithMessage("todo removed successfully!", res);
@@ -88,7 +88,13 @@ const updateStatus = async (req, res, next) => {
         "failed to update the status of task",
         res
       );
-    return responses.successWithMessage("the status of task changed!", res);
+    const newStatus = await models.Status.findOne({
+      where:{
+        id: statusId
+      },
+      attributes: ['id', 'name']
+    })  
+    return responses.successWithMessage("the status of task changed!", res, newStatus);
   } catch (err) {
     console.log("ERROR--> ", err);
     responses.serverError(res);

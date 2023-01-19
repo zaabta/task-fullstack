@@ -8,12 +8,8 @@ router.post("/login", controllers.login)
 router.get("/", middlewares.isAuth , controllers.index)  //farah
 router.delete("/", middlewares.isAuth, controllers.destroy) // Shafeeq
 router.put("/me", middlewares.isAuth , controllers.update) // me
+router.get("/logout", middlewares.isAuth , controllers.logOut) // me
 
-/*
-router.put("/", controllers.update) // yamen
-router.patch("/", controllers.restPassword) // Mais
-router.delete("/", controllers.destroy) // Shafeeq
-*/
 
 
 module.exports = router

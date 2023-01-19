@@ -18,6 +18,17 @@ const getUsers = async (req, res, next) => {
   }
 };
 
+
+const login = (req, res,next)=> {
+  try{
+
+  } catch (err) {
+    console.log("ERROR from service --> ", err);
+    throw new Error(err);
+  }
+}
+
 module.exports = {
-  getUsers
+  getUsers,
+  login
 };

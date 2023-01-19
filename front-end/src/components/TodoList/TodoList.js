@@ -11,6 +11,7 @@ const TodoList = ({items}) => {
         text={item.content} 
         color={item.color}
         key={item.id}
+        status={item.status}
         />
       ))}
     </div>

@@ -9,6 +9,9 @@ const Home = () => {
   });
 
   const { notes, addTasks, addTask } = useContext(DataCtx)
+
+  
+
   
 
   const getMyTasks = async () => {
@@ -36,8 +39,11 @@ const Home = () => {
     const json = await res.json()
     alert(json.messages)
     if(json.success){
-        addTask(json.data)
+        addTask({...json.data, status: "todo"})
     }
+    setInput({
+      content: ""
+    })
   };
 
   useEffect(() => {

@@ -4,9 +4,8 @@ const jwt = require("jsonwebtoken");
 const hashPassword = (password) => bcryptjs.hashSync(password, 10);
 const checkPassword = (password, hashedPassword) =>
   bcryptjs.compareSync(password, hashedPassword);
-
-const tokenGenerator = (data) =>
-  jwt.sign(data, process.env.SECRET_KEY, { expiresIn: "10h" });
+const tokenGenerator = (data, expiresIn = "10h") =>
+  jwt.sign(data, process.env.SECRET_KEY, { expiresIn });
 
 const decodeToken = (token) => {
   if (!token) return null;

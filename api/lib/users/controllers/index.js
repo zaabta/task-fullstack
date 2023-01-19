@@ -39,6 +39,7 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { account, password } = req.body;
+    
     if (!account || !password)
       return response.failedWithMessage(
         "please fill the account and password !",
@@ -150,11 +151,27 @@ const destroy = async (req, res, next) =>{
   }
 };
 
+const logOut = (req, res, next) =>{
+  try {
+    res.cookie("jwt", "", { expires: new Date(0) });
+    const decodeToken = auth_services.decodeToken(req.user.token)
+    delete decodeToken["iat"]
+    delete decodeToken["exp"]
+    const codedToken = auth_services.tokenGenerator(decodeToken, "0h")
+    return response.successWithMessage("Logged out", res, codedToken);
+  
+  } catch (err){
+    console.log("ERROR--> ", err);
+    return response.serverError(res);
+  }
+}
+
 
 module.exports = {
   register,
   login,
   index,
   destroy, 
-  update ,
+  update,
+  logOut
 };

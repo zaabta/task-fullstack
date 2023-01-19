@@ -44,7 +44,6 @@ const findUser = async ({ account, password }) => {
         }
       ]
     });
-    console.log(user)
     return user
   } catch (err) {
     console.log("ERROR FROM SERVİCE-->", err);

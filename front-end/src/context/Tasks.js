@@ -30,7 +30,8 @@ const TaskContext = ({ children }) => {
        notes,
        addTasks,
        addTask,
-       removeTask
+       removeTask,
+       setNotes
       }}
     >
       {children}

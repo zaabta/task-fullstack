@@ -4,7 +4,6 @@ const middlewares = require("../../middlewares");
 const controllers = require("../controllers");
 
 
-//made by 
 router.get(
   "/users",
   middlewares.isAuth,

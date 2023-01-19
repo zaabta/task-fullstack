@@ -12,7 +12,8 @@ const isAuth = (req, res, next) => {
     const decode = authService.decodeToken(token);
     if (!decode) return responses.unauthorized(res);
     req.user = {
-      ...decode
+      ...decode,
+      token
     };
     return next();
   } catch (err) {
