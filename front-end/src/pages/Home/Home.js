@@ -2,17 +2,15 @@ import { useState, useEffect, useContext } from "react";
 import TodoList from "../../components/TodoList/TodoList";
 import Box from "../../components/Box/Box";
 import { DataCtx } from "../../context/Tasks";
+import { AlertContex } from "../../context/AlertContex"
 
 const Home = () => {
   const [input, setInput] = useState({
     content: ""
   });
+  const { toggleOn } = useContext(AlertContex)
 
-  const { notes, addTasks, addTask } = useContext(DataCtx)
-
-  
-
-  
+  const { notes, addTasks, addTask } = useContext(DataCtx)  
 
   const getMyTasks = async () => {
     const res = await fetch("http://localhost:3000/api/v1/todoes", {
@@ -37,7 +35,7 @@ const Home = () => {
       body: JSON.stringify(data)
     });
     const json = await res.json()
-    alert(json.messages)
+    toggleOn(json.messages, json.success)
     if(json.success){
         addTask({...json.data, status: "todo"})
     }

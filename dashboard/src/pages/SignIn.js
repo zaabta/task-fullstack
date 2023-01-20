@@ -116,7 +116,11 @@ const SignIn = ()=> {
         } 
       })
     const json = await res.json()
-    if(json.success && json.data.user.type == "admin") navigate("/")
+    if(json.success && json.data.user.type == "admin"){
+      localStorage.setItem("token", json.data.token)
+      localStorage.setItem("user",JSON.stringify(json.data.user))
+       navigate("/")
+  } 
     };
 
     const onFinishFailed = (errorInfo) => {

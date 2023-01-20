@@ -53,7 +53,10 @@ const findUser = async ({ account, password }) => {
 
 const getUser = async ({userId: id})=>{
   try {
-    const user = await models.User.findByPk(id, {
+    const user = await models.User.findOne({
+      where:{
+        id
+      },
       include: [
         {
           model: models.UserType,
@@ -61,6 +64,7 @@ const getUser = async ({userId: id})=>{
         },
         {
           model: models.Task,
+          required: false,
           where: {
             deletedAt: null
           },

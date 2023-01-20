@@ -1,6 +1,7 @@
 import "./Todo.css";
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { DataCtx } from "../../context/Tasks";
+import {AlertContex} from "../../context/AlertContex"
 import {
   Dialog,
   DialogActions,
@@ -14,6 +15,7 @@ import {
 
 const Todo = ({ id, text, color, status }) => {
   const { removeTask, setNotes } = useContext(DataCtx);
+  const { toggleOn } = useContext(AlertContex)
   const [statusOptions, setStatusOptions] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
@@ -35,7 +37,7 @@ const Todo = ({ id, text, color, status }) => {
       })
     });
     const json = await res.json();
-    console.log(json);
+    toggleOn(json.messages, json.success)
     if (json.success) {
       setNotes((prev) => {
         const newTasks = [...prev];
@@ -80,7 +82,7 @@ const Todo = ({ id, text, color, status }) => {
       }
     });
     const json = await res.json();
-    alert(json.messages);
+    toggleOn(json.messages, json.success)
     if (json.success) {
       removeTask(id);
     }

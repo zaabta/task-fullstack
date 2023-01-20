@@ -73,8 +73,10 @@ const index = async (req, res, next) => {
   try {
     const userId = req.user.id
     const user = await services.getUser({userId})
+    console.log(user)
     if(!user) return response.failedWithMessage("failed to get info", res)
-    return response.successWithMessage("user info got successfully", res, user)
+    return response.successWithMessage("user info got successfully", res, {user: transformers.userTransformer(user),
+    task: transformers.todoesTransformer(user.Tasks)})
   } catch(err) {
 
   }
@@ -166,6 +168,19 @@ const logOut = (req, res, next) =>{
   }
 }
 
+const getUser = async (req, res, next) => {
+  try {
+    const userId = req.params.id
+    const user = await services.getUser({userId})
+    if(!user) return response.failedWithMessage("failed to get user infon", res)
+    return response.successWithMessage("the User found successfully ",res, {user: transformers.userTransformer(user), 
+      tasks: transformers.todoesTransformer(user.Tasks)})
+  } catch (err){
+    console.log("ERROR--> ", err);
+    return response.serverError(res);
+  }
+}
+
 
 module.exports = {
   register,
@@ -173,5 +188,6 @@ module.exports = {
   index,
   destroy, 
   update,
-  logOut
+  logOut,
+  getUser
 };

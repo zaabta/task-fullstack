@@ -4,13 +4,13 @@ const services = require("../services")
 
 const getUsers = async (req, res, next) => {
   try {
-    const users = services.getAllUsers();
+    const users = await services.getAllUsers();
     if (users?.length == 0)
       return response.failedWithMessage("failed to get users", res)
       return response.successWithMessage(
         "getting users successfully",
         res,
-        transformers.usersTransformer(users)
+        users
       );
   } catch (err) {
     console.log("ERROR from service --> ", err);
@@ -19,8 +19,8 @@ const getUsers = async (req, res, next) => {
 };
 
 
-const login = (req, res,next)=> {
-  try{
+const login = (req, res, next)=> {
+  try {
 
   } catch (err) {
     console.log("ERROR from service --> ", err);

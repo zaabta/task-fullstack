@@ -37,7 +37,8 @@ const store = async (req, res, next) => {
 const index = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const todoes = await services.getTodoes({ userId });
+    const offset = req.query.offset
+    const todoes = await services.getTodoes({ userId, offset });
     if (Array.isArray(todoes) && !todoes.length)
       return responses.failedWithMessage("no tasks yet! ", res);
     return responses.successWithMessage(

@@ -4,7 +4,7 @@ const userTransformer = (user)=> {
         transformeredUser.id = user?.id,
         transformeredUser.email = user?.email,
         transformeredUser.name = user?.name,
-        transformeredUser.type = user?.Type.type
+        transformeredUser.type = user?.Type?.type
         return transformeredUser
     }
     return user

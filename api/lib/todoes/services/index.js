@@ -28,18 +28,23 @@ const createTodo = async ({ userId, content, startDate, endDate }) => {
   }
 };
 
-const getTodoes = async ({ userId }) => {
+const getTodoes = async ({ userId, offset }) => {
   try {
-    const todoes = await models.Task.findAll({
+    const todoes = await models.Task.findAndCountAll({
       where: {
         userId,
         deletedAt: null
       },
+      order: [
+        ['createdAt', 'DESC'],
+    ],
       include: [
         {
           model: models.Status
         }
-      ]
+      ],
+      offset: offset ? +offset: 0,
+      limit: 2
     });
     return todoes;
   } catch (err) {
