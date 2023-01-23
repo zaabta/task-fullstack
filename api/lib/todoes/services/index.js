@@ -28,8 +28,20 @@ const createTodo = async ({ userId, content, startDate, endDate }) => {
   }
 };
 
-const getTodoes = async ({ userId, offset }) => {
+const getTodoes = async ({ userId }) => {
   try {
+    const todoes = await models.Task.findAll({
+      where: {
+        userId,
+        deletedAt: null
+      },
+      include: [
+        {
+          model: models.Status
+        }
+      ]
+    });
+    /*
     const todoes = await models.Task.findAndCountAll({
       where: {
         userId,
@@ -44,8 +56,9 @@ const getTodoes = async ({ userId, offset }) => {
         }
       ],
       offset: offset ? +offset: 0,
-      limit: 2
+      limit: 2 
     });
+    */
     return todoes;
   } catch (err) {
     console.log("ERROR from service --> ", err);
